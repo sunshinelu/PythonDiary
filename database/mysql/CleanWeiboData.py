@@ -137,7 +137,7 @@ for x in col_content:
 
 print "=====取list里面的第一个======="
 for x in col_content:
-    s1 = re.findall(r"【(.{1,100})】", x)
+    s1 = re.findall(r"【(.{5,100})】", x)
     if len(s1) >= 1:
         s2 = s1[0].encode('utf-8')
     else:
