@@ -14,14 +14,12 @@ spark = SparkSession.builder\
 
 sc = spark.sparkContext
 
-
-
 text_file = sc.textFile("file:///Users/sunlu/Workspaces/PyCharm/Github/pythonDemo/SparkDemo/wordCountDemo2.txt")
 def splitChar(x):
     result = ""
     for i in x:
         result = result + " " + i
-    return result
+    return result.encode('utf-8')
 
 wordCounts = text_file.map(lambda x: splitChar(x)).flatMap(lambda line: line.split(" ")) \
              .map(lambda word: (word, 1)) \
