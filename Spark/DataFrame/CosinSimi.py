@@ -36,6 +36,9 @@ print static_vector
 df = sparkSession.createDataFrame([[random_dense_vector()] for x in xrange(10)], ["myCol"])
 df.limit(3).toPandas()
 
+print("====printSchema====")
+print(df.printSchema())
+
 print df.show()
 # write our UDF for cosine similarity
 def cos_sim(a,b):
@@ -47,3 +50,9 @@ df = df.withColumn("coSim", udf(cos_sim, FloatType())(col("myCol"), array([lit(v
 print "9999999999999",df.show()
 res = df.limit(10).toPandas()
 print res
+
+print("====================")
+print(array([lit(v) for v in static_vector]))
+
+for v in static_vector:
+    print v
