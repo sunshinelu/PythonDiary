@@ -20,6 +20,14 @@ from sqlalchemy import create_engine
     @ 方法：删除、不处理、插补[均值]、插补[均值]、插补[中位数]、插补[固定值]、插补[回归方法]
     """
 
+"""
+
+flask中连接MySQL出现ModuleNotFoundError: No module named 'MySQLdb'错误
+https://blog.csdn.net/qq_25046261/article/details/78991442
+
+Python3 MySQL 数据库连接 - PyMySQL 驱动
+http://www.runoob.com/python3/python3-mysql.html
+"""
 
 def dele_data(self):
     # 过滤缺失数据

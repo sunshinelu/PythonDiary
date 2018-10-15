@@ -4,6 +4,12 @@ import pandas as pd
 import pymysql
 import numpy as np
 
+"""
+参考链接：
+填补空缺值（平均值）
+https://blog.csdn.net/tt_258/article/details/69359631
+"""
+
 ## 加上字符集参数，防止中文乱码
 db = pymysql.connect(
     host="localhost",  # 127.0.0.1
