@@ -6,18 +6,30 @@
 @Contact:    lufeng0614@163.com
 @Time:       2018/10/10  11:15
 @note：      big data pre processing
-@include：   缺失值、异常值......
+@include：   本脚本包含 {参数} 及 {方法} 说明
+            参数：
+            temp_table      临时表名
+            option          预处理方法
+            new_table       新表名
+            constant        固定值传参
+            方法：
+            dele_data       删除
+            donothing       不处理
+            mean_data       均值
+            median_data     中位数
+            mode_data       众数
+            fill_constant   固定值
 """
 from __future__ import print_function
 
 from flask import Flask, request
-import MySQLdb
+import pymysql
 import pandas as pd
 from sqlalchemy import create_engine
 
 """
     @ 缺失值处理：
-    @ 方法：删除、不处理、插补[均值]、插补[均值]、插补[中位数]、插补[固定值]、插补[回归方法]
+    @ 方法：删除、不处理、插补[均值]、插补[中位数]、插补[众数]、插补[固定值]、插补[回归方法]
     """
 
 def dele_data(self):
@@ -26,16 +38,37 @@ def dele_data(self):
     drop_data = self.dropna()
     return drop_data
 
-def median_data(self):
+def donothing(self):
+
+    # 插补[不处理]
+    return self
+
+def mean_data(self):
 
     # 插补均值
-    describe = self.describe()
-    # 逐个判定元素是否需要插值
-    for i in self.columns:
-        for j in range(len(self)):
-            if (self[i].isnull())[j]:  # 如果为空即插值
-                self[i][j] = describe.loc['50%']
-    return self
+    col_median = self.iloc[1:-1]
+    fill_mean = self.fillna(col_median.mean())
+    return fill_mean
+
+def median_data(self):
+
+    # 插补[中位数]
+    col_median = self.iloc[1:-1]
+    fill_median = self.fillna(col_median.median())
+    return fill_median
+
+def mode_data(self):
+
+    # 插补[众数]
+    col_mode = self.iloc[1:-1]
+    fill_mode = self.fillna(col_mode.median())
+    return fill_mode
+
+def fill_constant(self,constant):
+
+    # 插固定值
+    fill_value = self.fillna(constant)
+    return fill_value
 
 
 """
@@ -53,12 +86,24 @@ def get():
     option = request.args.get("option")
     # 写入表名
     new_table = request.args.get('new_table')
+    # 固定值参数
+    constant = request.args.get('constant')
 
-    print(temp_table, option, new_table)
+    print(temp_table, option, new_table, constant)
 
     # (1) 从临时表查询数据；(2) 调用option对应方法处理；(3) 写入正式表，并删除 temp_table
-    # 打开数据库连接
-    db = MySQLdb.connect(host='localhost', port=3316, user='root', passwd='root', db='data_mining_DB')
+    # for 144
+    # db = pymysql.connect(host='172.16.10.144', port=3316, user='root', passwd='bigdata', db='test')
+
+    # for local test
+    db = pymysql.connect(
+        host="localhost",  # 127.0.0.1
+        database="data_mining_DB",
+        user="root",
+        password="123456",
+        port=3306,
+        charset='utf8'
+    )
     cursor = db.cursor()
     # 查询数据
     sql_data = "select * from %s" % (temp_table)
@@ -77,13 +122,31 @@ def get():
         # 实例化MissValue类
         # missvalue = MissValue()
 
+        # 删除
         if option == 'dele_data':
             right_data = dele_data(data)
+        # 不处理
+        if option == 'donothing':
+            right_data = donothing(data)
+        # 均值
+        if option == 'mean_data':
+            right_data = mean_data(data)
+
+        # 中位数
         if option == 'median_data':
             right_data = median_data(data)
+        # 众数
+        if option == 'mode_data':
+            right_data = mode_data(data)
+        # 固定值
+        if option == 'fill_constant':
+            right_data = fill_constant(data, constant)
+        # 插值[回归]
+
+
 
         # 将数据写入mysql的数据库，但需要先通过sqlalchemy.create_engine建立连接,且字符编码设置为utf8，否则有些latin字符不能处理
-        yconnect = create_engine('mysql+mysqldb://root:root@localhost:3316/data_mining_DB?charset=utf8')
+        yconnect = create_engine('mysql+mysqldb://root:bigdata@172.16.10.144:3316/test?charset=utf8')
         pd.io.sql.to_sql(right_data, new_table, yconnect, if_exists='append', index=False, index_label=None)
 
         # 删除缓存表
