@@ -37,6 +37,31 @@ if __name__ == '__main__':
     fpr, tpr, thresholds = metrics.roc_curve(y_one_hot.ravel(),y_score.ravel())
     auc = metrics.auc(fpr, tpr)
     print '手动计算auc：', auc
+
+    print "============="
+    print len(y_one_hot.ravel())
+    print len(y_score.ravel())
+    print y_score.shape
+
+    df = pd.DataFrame(y_test,columns=["pred"])
+    print df
+    df_score = pd.DataFrame(y_score)
+
+
+    score_col_name = []
+
+    for i in range(n_class):
+        # lst = lst + ["lable_" + str(i)] # 方法一
+        score_col_name.append("score_" + str(i))  # 方法二
+
+    df_score.columns = score_col_name
+    print df_score
+
+    df = pd.concat([df,df_score], axis=1)
+
+    print df
+
+"""
     #绘图
     mpl.rcParams['font.sans-serif'] = u'SimHei'
     mpl.rcParams['axes.unicode_minus'] = False
@@ -53,3 +78,4 @@ if __name__ == '__main__':
     plt.legend(loc='lower right', fancybox=True, framealpha=0.8, fontsize=12)
     plt.title(u'鸢尾花数据Logistic分类后的ROC和AUC', fontsize=17)
     plt.show()
+"""
