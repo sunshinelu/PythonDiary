@@ -77,7 +77,7 @@ def baike_extract(url,name):
         file_name.write(jsobj)
         file_name.close()
         for i,j in property.iteritems():
-            print i,j
+            print(i,j)
 
     elif 'http://baike.sogou.com/' in url:
         req = urllib2.Request(url)
@@ -98,7 +98,7 @@ def baike_extract(url,name):
         file_name.write(jsobj)
         file_name.close()
         for i,j in property.iteritems():
-            print i,j
+            print(i,j)
     else:
         return None
 

@@ -7,7 +7,7 @@ from lxml import etree
 import re
 import chardet
 import urllib.request
-from lxml import etree
+# from lxml import etree
 import re
 import json
 
@@ -28,7 +28,8 @@ dbconn=pymysql.connect(
  )
 
 # sql语句
-sqlcmd = "select * from cnki_details"
+# sqlcmd = "select * from cnki_details"
+sqlcmd = "select * from cnki_details_dropdup_2"
 
 # 利用pandas 模块导入mysql数据
 df = pd.read_sql(sqlcmd,dbconn)
