@@ -21,18 +21,18 @@ pre_time = 12
 """
 测试1. 将本地数据直接读取为Series类型
 """
-print "测试1. 将本地数据直接读取为Series类型"
+print("测试1. 将本地数据直接读取为Series类型")
 
 df_series = pd.Series.from_csv(data_path)
 # print df_series.dtypes
-print df_series
+print(df_series)
 
 ts_fit_1 = auto_arima(df_series[0:500],start_p=1, start_q=1, max_p=3, max_q=3, m=12,
                           start_P=0, seasonal=True, d=1, D=1, trace=True,
                           error_action='ignore',  # don't want to know if an order does not work
                           suppress_warnings=True,  # don't want convergence warnings
                           stepwise=True)  # set to stepwise
-print ts_fit_1.summary()
+print(ts_fit_1.summary())
 
 
 model_1 = "ts_model_1"
@@ -43,13 +43,13 @@ with open(path + model_1, 'wb') as pkl:
 
 
 predict_data_1 = joblib.load(path + model_1).predict(n_periods=int(pre_time))
-print predict_data_1
+print(predict_data_1)
 
 
 """
 测试2. 将本地数据读取为dataframe，再转化为Series类型
 """
-print "测试2. 将本地数据读取为dataframe，再转化为Series类型"
+print("测试2. 将本地数据读取为dataframe，再转化为Series类型")
 
 df_csv = pd.read_csv(data_path,header=None,sep=',')
 df_csv.columns = ["time","value"]
@@ -69,12 +69,12 @@ with open(path + model_2, 'wb') as pkl:
     pickle.dump(ts_fit_2, pkl)
 
 predict_data_2 = joblib.load(path + model_2).predict(n_periods=int(pre_time))
-print predict_data_2
+print(predict_data_2)
 
 """
 测试3. 将mysql数据读取为dataframe，再转化为Series类型
 """
-print "测试3. 将mysql数据读取为dataframe，再转化为Series类型"
+print("测试3. 将mysql数据读取为dataframe，再转化为Series类型")
 
 ## 加上字符集参数，防止中文乱码
 dbconn=pymysql.connect(
@@ -106,14 +106,14 @@ with open(path + model_3, 'wb') as pkl:
     pickle.dump(ts_fit_3, pkl)
 
 predict_data_3 = joblib.load(path + model_3).predict(n_periods=int(pre_time))
-print predict_data_3
+print(predict_data_3)
 
 
 """
 结果保存
 """
 
-print "结果保存"
+print("结果保存")
 
 predict_data_1 = pd.DataFrame(predict_data_1,columns=['Prediction'])
 predict_data_2 = pd.DataFrame(predict_data_2,columns=['Prediction'])

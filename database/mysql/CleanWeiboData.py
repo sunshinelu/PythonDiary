@@ -7,9 +7,9 @@ from lxml import etree
 import re
 import chardet
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 
 # connect mysql
 ## 加上字符集参数，防止中文乱码
@@ -31,12 +31,12 @@ df = pd.read_sql(sqlcmd,dbconn)
 # get specific columns
 columns = ["ID", "TEXT"]
 df1 = df[columns]
-print df1.count()
+print(df1.count())
 
 df1['text_length'] = df1['TEXT'].apply(len)
 
 df1 = df1[df1.text_length > 10]
-print df1.count()
+print(df1.count())
 
 # 提取正文
 def xpathFunc(arg1):
@@ -80,23 +80,23 @@ for i in col_test2:
 
 df1['CONTENT'] = col_content
 
-print df1.head(5)
-print df1.describe()
+print(df1.head(5))
+print(df1.describe())
 
-print "======="
+print("=======")
 df2 = df1[df1.CONTENT.str.contains(u'\u3010')]
-print df2['CONTENT'].head(5)
+print(df2['CONTENT'].head(5))
 
-print "======="
+print("=======")
 
-print "++++++++++"
+print("++++++++++")
 df2 = df1[df1.CONTENT.str.contains('【')]
-print df2['CONTENT'].head(5)
+print(df2['CONTENT'].head(5))
 
-print "++++++++++"
+print("++++++++++")
 
 # df2 = df1[df1.TEXT.str.contains("福建")]
-print df2.count()
+print(df2.count())
 
 # check strings' coder for each string in list
 # for x in col_content:
@@ -110,7 +110,7 @@ for x in col_content:
     for i in s1:
         s2 = s2 + i.encode('utf-8')
     # s2 = re.sub(s1,"【|】")
-    print s2.encode('utf-8')
+    print(s2.encode('utf-8'))
 
 # col_content2 = []
 # for i in col_content:
@@ -135,11 +135,11 @@ for x in col_content:
 #     print s2.encode('utf-8')
 
 
-print "=====取list里面的第一个======="
+print("=====取list里面的第一个=======")
 for x in col_content:
     s1 = re.findall(r"【(.{5,100})】", x)
     if len(s1) >= 1:
         s2 = s1[0].encode('utf-8')
     else:
         s2 = "".encode('utf-8')
-    print s2.encode('utf-8')
+    print(s2.encode('utf-8'))
