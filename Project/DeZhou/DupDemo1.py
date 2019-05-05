@@ -34,7 +34,7 @@ df_dup = df[dup_index]
 # 指定多列进行重复数据判断
 s = "TYPE_NAME,PROVIDER"
 l = s.split(",")
-dup_index = df.duplicated(l)
+dup_index = df.duplicated(l) # dup_index = df.duplicated(l,keep=False) 把所有的重复数据都保存出来
 df_dup = df[dup_index]
 """
 
