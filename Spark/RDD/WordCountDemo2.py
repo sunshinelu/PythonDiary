@@ -23,7 +23,7 @@ sc = spark.sparkContext
 # x = sc.parallelize([("a", 1), ("b", 4),("c", 3),("d", 2)])
 # print x.count()
 text_file = sc.textFile("file:///Users/sunlu/Workspaces/PyCharm/Github/pythonDemo/SparkDemo/wordCountDemo2.txt")
-print text_file.count()
+print(text_file.count())
 def splitChar(x):
     result = ""
     for i in x:
@@ -33,7 +33,7 @@ wordCounts = text_file.map(lambda x: splitChar(x)).flatMap(lambda line: line.spl
              .map(lambda word: (word, 1)) \
              .reduceByKey(lambda a, b: a + b)
 def is_str(s):
-    return isinstance(s, basestring)
+    return(isinstance(s, basestring))
 
 # wordCounts2 = wordCounts.filter(lambda x: x[1] >= 3).map(lambda x: [x[0].encode('unicode_escape').decode('gbk'), x[1]])
 #
@@ -48,7 +48,7 @@ wordCounts2 = wordCounts.filter(lambda x: x[1] >= 3).map(lambda x: [x[0].encode(
 
 # print text_file.collect()
 
-print wordCounts2.collect()
+print(wordCounts2.collect())
 
 
 def f(x):
