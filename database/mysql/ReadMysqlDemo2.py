@@ -6,6 +6,8 @@ import numpy as np
 from sqlalchemy import create_engine
 
 from datetime import datetime
+
+
 a=datetime.now()
 
 ## 加上字符集参数，防止中文乱码
@@ -23,7 +25,7 @@ sqlcmd = "select * from ml_info_item"
 
 # 利用pandas 模块导入mysql数据
 df = pd.read_sql(sqlcmd, dbconn)
-# 取前5行数据
+#
 # df_not_null = df[df["OPEN_CONDITION"].isnull()]
 df_not_null = df[df["COL_NAME"].isnull()]
 
