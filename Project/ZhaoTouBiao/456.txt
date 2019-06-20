@@ -1,0 +1,145 @@
+<tr> 
+ <td background="images/erji/er_bk_04.jpg">&nbsp;</td> 
+ <td bgcolor="#FFFFFF" align="center">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
+   <tbody>
+    <tr> 
+     <td align="center"><b class="Font9"> </b></td> 
+    </tr> 
+    <tr> 
+     <td background="images/main/table_bk_04.jpg"></td> 
+    </tr> 
+    <tr> 
+     <td class="aa"> </td>
+    </tr>
+    <tr>
+     <td colspan="2" align="center">
+      <div align="center">
+       <input type="hidden" name="UnitId" size="30" maxsize="50" value="200068889" class="textbox">山东省济南市商河县怀仁镇2019年“四好农村路”提档升级项目公开招标公告
+      </div>
+      <div align="center">
+       <input type="hidden" name="BuyKind" size="30" maxsize="50" value="01" class="textbox">
+       <input type="hidden" name="NoticeType" size="30" value="0" class="textbox">
+      </div></td>
+    </tr>
+    <tr>
+     <td>一、采购人：<input type="hidden" name="UnitCode" size="30" maxsize="50" value="904" class="textbox">商河县怀仁镇人民政府&nbsp;&nbsp;&nbsp;&nbsp;地址：商河县怀仁镇民本街1号</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系方式：0531-84910011</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购代理机构：<input type="hidden" name="AgentCode" size="30" maxsize="50" value="128" class="textbox">山东金正工程项目管理有限公司&nbsp;&nbsp;&nbsp;&nbsp;地址：山东省东营市东营区县（区）府前大街67号万达国际大厦</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系方式：15263867099</td>
+    </tr>
+    <tr>
+     <td>二、采购项目名称：山东省济南市商河县怀仁镇2019年“四好农村路”提档升级项目</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购项目编号（采购计划编号）：SDGP370126201902000148</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采购项目分包情况：</td>
+    </tr>
+    <tr>
+     <td valign="top">
+      <table id="NoticeDetail" cellspacing="0" cellpadding="1" width="100%" style="border-collapse: collapse" border="1">
+       <tbody>
+        <tr>
+         <td align="center">标包</td>
+         <td align="center">货物服务名称</td>
+         <td align="center">数量</td>
+         <td align="center">投标人资格要求</td>
+         <td align="center">本包预算金额（最高限价，单位：万元）</td>
+        </tr>
+        <tr>
+         <td align="center" height="30">A</td>
+         <td align="center">山东省济南市商河县怀仁镇人民政府2019年“四好农村路”提档升级项目&nbsp;</td>
+         <td align="center">1&nbsp;</td>
+         <td align="center">1、符合《中华人民共和国政府采购法》第二十二条第一款规定，且应符合以下要求；2、必须具有公路工程施工总承包叁级（含）以上资质或市政公用工程施工总承包叁级（含）以上资质；3、拟投报建造师需具有公路或市政专业贰级（含）以上注册建造师证书及有效的安全生产考核合格证书（B证），且未担任其他在施建设工程项目的项目经理；4、经国家企业信用信息公示系统（www.gsxt.gov.cn）查询，投标人不得存在被列入经营异常名录的（被移出的除外）或严重违法失信企业名单（黑名单）行为的（被移出的除外）；5、经信用中国（www.creditchina.gov.cn）网站查询信用记录投标人未被列入黑名单；6、经中国政府采购网（www.ccgp.gov.cn）查询未被列入政府采购严重违法失信行为记录名单；7、本项目不接受联合体。&nbsp;</td>
+         <td align="center">950.000000&nbsp;</td>
+        </tr>
+       </tbody>
+      </table></td>
+    </tr>
+    <tr>
+     <td>三、需求公示（见附件）</td>
+    </tr>
+    <tr>
+     <td></td>
+    </tr>
+    <tr>
+     <td>四、获取招标文件</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.时间：2019年6月18日8时30分至2019年6月24日17时0分（报名截止时间）（北京时间，法定节假日除外）</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.地点：济南市商河县文景花苑1号楼（商中路与鑫源路交叉口西30米路南）。</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.方式：现场发售，谢绝邮购。符合要求的投标人，有意参加本项目的，须在中国山东政府采购网（http://www.ccgp-shandong.gov.cn/sdgp2017/site/index.jsp）、济南公共资源交易中心（http://jnggzy.jinan.gov.cn/）注册登记并报名，注册并报名成功后，进行现场登记报名。参与的投标人应提供有关有效证件【营业执照副本原件、资质证书副本原件或复印件、企业安全生产许可证副本原件、如法定代表人购买招标文件的，须提供法定代表人身份证原件；如法定代表人委托代理人购买招标文件的，须提供法定代表签字（或盖章）的授权委托书原件及委托代理人的身份证原件】及加盖投标人公章的复印件一份。</td>
+    </tr>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.售价：700元/包，售后不退。</td>
+    </tr>
+    <tr>
+     <td>五、公告期限：2019年6月18日 至 2019年6月24日</td>
+    </tr>
+    <tr>
+     <td>六、递交投标文件时间及地点</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.时间：2019年7月10日9时30分至2019年7月10日10时0分（北京时间）</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.地点：济南公共资源交易中心商河分中心二楼开标室。</td>
+    </tr>
+    <tr>
+     <td>七、开标时间及地点</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.时间：2019年7月10日10时0分（北京时间）</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.地点：济南公共资源交易中心商河分中心二楼开标室。</td>
+    </tr>
+    <tr>
+     <td>八、采购项目联系方式：</td>
+    </tr>
+    <tr>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系人：倪曙光&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系方式：15263867099<input type="hidden" name="LinkMan" size="10" readonly value="倪曙光"><input type="hidden" name="LinkTel" size="10" readonly value="15263867099"></td>
+    </tr>
+    <tr>
+     <td>九、采购项目的用途、数量、简要技术要求等<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;详见招标文件。</td>
+    </tr>
+    <tr>
+     <td>十、采购项目需要落实的政府采购政策<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;详见招标文件。</td>
+    </tr>   
+    <tr> 
+     <td height="20"><span id="file_list"></span></td> 
+    </tr> 
+    <tr> 
+     <td height="20" align="right" class="Font9">发布人：倪曙光</td> 
+    </tr> 
+    <tr> 
+     <td height="20" align="right" class="Font9">发布时间：2019年06月17日 17时44分44秒</td> 
+    </tr> 
+    <tr> 
+     <td background="images/main/table_bk_04.jpg"></td> 
+    </tr> 
+    <tr> 
+     <td height="30"><b class="lg"> <img border="0" src="images/huan.jpg" width="11" height="11">&nbsp; 相关信息</b> </td> 
+    </tr> 
+    <tr>
+     <td><img src="images/arrow4.gif" width="7" height="5"><a href="readneed.jsp?id=200034863">1、商河县怀仁镇人民政府商河县怀仁镇2019年“四好农村路”提档升级项目需求公开</a></td>
+    </tr> 
+    <tr>
+     <td><img src="images/arrow4.gif" width="7" height="5"><a href="read.jsp?id=201098655">2、山东省济南市商河县怀仁镇2019年“四好农村路”提档升级项目公开招标公告</a></td>
+    </tr> 
+   </tbody>
+  </table></td> 
+ <td background="images/erji/er_bk_05.jpg">&nbsp;</td> 
+</tr>
