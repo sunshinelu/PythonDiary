@@ -221,7 +221,7 @@ content = """
 def run_123(content):
     parser = etree.HTMLParser(encoding="utf-8")
     html = etree.HTML(str(content), parser=parser)
-    p_seletors = html.xpath('//*[@class="vF_detail_content"]/p')
+    p_seletors = html.xpath('//*[@class="vF_detail_content"]/p') #  此方法提取信息不全
     p_list = []
     for p_seletor in p_seletors:
         p_content = p_seletor.xpath('.//text()')
