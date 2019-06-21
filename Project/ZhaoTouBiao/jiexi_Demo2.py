@@ -232,4 +232,20 @@ def run_123(content):
     file_content = '\n'.join(p_list)
     print(file_content)
 
-run_123(content=content)
+def run_123_2(content):
+    parser = etree.HTMLParser(encoding="utf-8")
+    # html = etree.parse('123.txt', parser=parser)
+    html = etree.HTML(str(content), parser=parser)
+    p_seletors = html.xpath('//*[@class="vF_detail_content"]/*')
+    p_list = []
+    for p_seletor in p_seletors:
+        p_content = p_seletor.xpath('.//text()')
+        p_content = map(lambda x: x.strip(), p_content)
+        p_content = "".join(p_content)
+        # print(p_content)
+        p_list.append(p_content)
+    file_content = '\n'.join(p_list)
+    print(file_content)
+
+
+run_123_2(content=content)

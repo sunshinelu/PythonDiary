@@ -1,14 +1,10 @@
 from lxml import etree
 
-"""
-run_123有点问题
-"""
-
 
 def run_123():
     parser = etree.HTMLParser(encoding="utf-8")
     html = etree.parse('123.txt', parser=parser)
-    p_seletors = html.xpath('//*[@class="vF_detail_content"]/p')
+    p_seletors = html.xpath('//*[@class="vF_detail_content"]/*')
     p_list = []
     for p_seletor in p_seletors:
         p_content = p_seletor.xpath('.//text()')
@@ -37,5 +33,4 @@ def run_456():
 
 if __name__ == '__main__':
     run_123()
-    print("================================")
-    run_456()
+    # run_456()
