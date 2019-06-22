@@ -9,6 +9,8 @@ Run with:
 
     ./bin/spark-submit --master spark://$(hostname -s):7077 exampleweb.py
 
+在win下以local模式运行：
+spark-submit --master local exampleweb.py
 """
 
 import sys
