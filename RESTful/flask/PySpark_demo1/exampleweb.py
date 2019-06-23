@@ -26,6 +26,7 @@ Mac中默认的python版本是2.7，但是程序使用的python版本是3.6，�
 修改spark-env.sh文件，新增
 export PYSPARK_PYTHON=/Users/sunlu/anaconda2/envs/python36/lib/python3.6
 export PYSPARK_DRIVER_PYTHON=/Users/sunlu/anaconda2/envs/python36/bin/python3.6
+（改完spark-env.sh后，pyspark启动是用python3）
 
 代码中增加：
 import os
