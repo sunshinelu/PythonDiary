@@ -15,3 +15,5 @@ ds1 = spark.read \
     .option("user", "sa") \
     .option("password", "Yiyun@3372") \
     .load()
+
+ds1.show(10, truncate=False)
