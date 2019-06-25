@@ -10,7 +10,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
 
 # os.environ["PYSPARK_PYTHON"]="/usr/bin/python3"
-os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6"
+# os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
 
 spark = SparkSession\
         .builder\
