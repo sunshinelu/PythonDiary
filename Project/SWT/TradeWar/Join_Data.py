@@ -10,7 +10,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
 
 # os.environ["PYSPARK_PYTHON"]="/usr/bin/python3"
-# os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
+os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
 
 spark = SparkSession\
         .builder\
@@ -30,7 +30,7 @@ ds_trade_code = spark.read.jdbc(url=url,table="ut_trade_code").select("CODE","NA
 ds_transport_code = spark.read.jdbc(url=url,table="ut_transport_code").select("CODE","NAME").withColumnRenamed("NAME","TRANSPORT")
 
 
-ds1 = ds.join(ds_company_code,ds.COMPANYCODE ==  ds_company_code.CODE,"inner").drop("CODE").drop("COMPANYCODE")
+ds1 = ds.join(ds_company_code, ds.COMPANYCODE == ds_company_code.CODE,"inner").drop("CODE").drop("COMPANYCODE")
 
 ds2 = ds1.join(ds_hs_code, ds1.HSCODE == ds_hs_code.CODE,"inner").drop("CODE").drop("HSCODE")
 
@@ -38,14 +38,21 @@ ds3 = ds2.join(ds_consign_code, ds2.CONSIGNCODE == ds_consign_code.CODE, "inner"
 
 ds4 = ds3.join(ds_trade_code, ds3.TRADECODE == ds_trade_code.CODE, "inner").drop("CODE").drop("TRADECODE")
 
-ds5 = ds4.join(ds_country_code, ds4.COUNTRYCODE  == ds_country_code.CODE,"inner").drop("CODE").drop("COUNTRYCODE")
+ds5 = ds4.join(ds_country_code, ds4.COUNTRYCODE == ds_country_code.CODE,"inner").drop("CODE").drop("COUNTRYCODE")
 
-ds6 = ds5.join(ds_cust_code, ds5.CUSTCODE  == ds_cust_code.CODE, "inner").drop("CODE").drop("CUSTCODE")
+ds6 = ds5.join(ds_cust_code, ds5.CUSTCODE == ds_cust_code.CODE, "inner").drop("CODE").drop("CUSTCODE")
 
-ds7 = ds6.join(ds_transport_code, ds6.TRANSPORTCODE  == ds_transport_code.CODE, "inner").drop("CODE").drop("TRANSPORTCODE")
+ds7 = ds6.join(ds_transport_code, ds6.TRANSPORTCODE == ds_transport_code.CODE, "inner").drop("CODE").drop("TRANSPORTCODE")
 
+col_name = ["COMPANYNAME","COMMODITIES","UNITCODE","CONSIGN","TRADE","COUNTRY","CUST","TRANSPORT","QUNT","SUMQ","USD","SUMM","RMB","RMBSUMM"]
+# 企业名、主要商品、计量单位、货源地（出口）/境内目的地（进口）、贸易方式、国别、进出口关区、运输方式、当月数量、累计数量、当月美元、累计美元、当月rmb、累计rmb
+ds8 = ds7.select(col_name)
 
-ds7.printSchema()
+# ds7.printSchema()
+# print("========================")
+# ds8.printSchema()
 
-ds7.show(truncate=False)
+# ds8.show(truncate=False)
+
+ds8.coalesce(5).write.mode("overwrite").jdbc(url=url,table="b_data_201707_e_ana")
 
