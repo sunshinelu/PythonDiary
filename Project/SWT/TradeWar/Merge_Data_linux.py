@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
 
-"""
-数据合并，进口数据保存到data_import表中，出口数据保存到data_export.
 
 """
 
+在192.168.37.28 bigdata8上执行
+报错：
+py4j.protocol.Py4JJavaError: An error occurred while calling o361.jdbc. : scala.MatchError: null
+
+1. pyspark 写入MySQL报错 An error occurred while calling o45.jdbc.: scala.MatchError: null 解决方案
+https://blog.csdn.net/helloxiaozhe/article/details/81033767
+
+
+"""
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-import os
-os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
 
 
 spark = SparkSession\
@@ -17,18 +22,20 @@ spark = SparkSession\
         .getOrCreate()
 
 ds_tables = spark.read.format('jdbc').\
-    options(url='jdbc:mysql://localhost:3306/',
+    options(url='jdbc:mysql://10.20.5.49:3306/',
             dbtable='information_schema.tables',
             user='root',
-            password='root',
+            password='BigData@2018',
             driver='com.mysql.jdbc.Driver').\
     load().\
-    filter("table_schema = 'gongdan'").\
+    filter("table_schema = 'swt_tradewar'").\
     select("TABLE_NAME").filter(col("TABLE_NAME").startswith("b_data_"))
 
 list_tables = list(ds_tables.rdd.map(lambda x:x.TABLE_NAME).collect())
 
-url = "jdbc:mysql://localhost:3306/gongdan?useUnicode=true&characterEncoding=UTF-8&user=root&password=root"
+list_tables = filter(lambda x:str(x).startswith("b_data_2018"),list_tables)
+
+url = "jdbc:mysql://10.20.5.49:3306/swt_tradewar?useUnicode=true&characterEncoding=UTF-8&user=root&password=BigData@2018"
 
 ds_company_code = spark.read.jdbc(url=url,table="ut_company_code").select("CODE","NAME").withColumnRenamed("NAME","COMPANYNAME")
 ds_consign_code = spark.read.jdbc(url=url,table="ut_consign_code").select("CODE","NAME").withColumnRenamed("NAME","CONSIGN")
@@ -43,6 +50,7 @@ col_name = ["COMPANYNAME", "COMMODITIES", "UNITCODE", "CONSIGN", "TRADE", "COUNT
             "SUMQ", "USD", "SUMM", "RMB", "RMBSUMM"]
 
 for db_table in list_tables:
+    print(db_table+" start!")
     type = str(db_table).split("_")[3]
     time = str(db_table).split("_")[2]
     year = str(time[0:4])
@@ -57,8 +65,14 @@ for db_table in list_tables:
     ds7 = ds6.join(ds_transport_code, ds6.TRANSPORTCODE == ds_transport_code.CODE, "inner").drop("CODE").drop("TRANSPORTCODE")
     ds8 = ds7.select(col_name).withColumn("TIME", lit(time)).withColumn("YEAR", lit(year)).withColumn("MONTH", lit(month))
     if type == "e":
-        ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_export")
-    if type == "i":
-        ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_import")
+        # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_export") # 在bigdata8运行出错代码
+        ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_export_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
+        print(db_table + " finish!")
+    # if type == "i":
+    #     # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_import")  # 在bigdata8运行出错代码
+    #     ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_import_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
+    #     print(db_table + " finish!")
+
+
 
 spark.stop()
