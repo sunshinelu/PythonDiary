@@ -33,7 +33,7 @@ ds_tables = spark.read.format('jdbc').\
 
 list_tables = list(ds_tables.rdd.map(lambda x:x.TABLE_NAME).collect())
 
-list_tables = filter(lambda x:str(x).startswith("b_data_2018"),list_tables)
+list_tables = filter(lambda x:str(x).startswith("b_data_2017"),list_tables)
 
 url = "jdbc:mysql://10.20.5.49:3306/swt_tradewar?useUnicode=true&characterEncoding=UTF-8&user=root&password=BigData@2018"
 
@@ -64,14 +64,14 @@ for db_table in list_tables:
     ds6 = ds5.join(ds_cust_code, ds5.CUSTCODE == ds_cust_code.CODE, "inner").drop("CODE").drop("CUSTCODE")
     ds7 = ds6.join(ds_transport_code, ds6.TRANSPORTCODE == ds_transport_code.CODE, "inner").drop("CODE").drop("TRANSPORTCODE")
     ds8 = ds7.select(col_name).withColumn("TIME", lit(time)).withColumn("YEAR", lit(year)).withColumn("MONTH", lit(month))
-    if type == "e":
-        # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_export") # 在bigdata8运行出错代码
-        ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_export_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
-        print(db_table + " finish!")
-    # if type == "i":
-    #     # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_import")  # 在bigdata8运行出错代码
-    #     ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_import_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
+    # if type == "e":
+    #     # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_export") # 在bigdata8运行出错代码
+    #     ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_export_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
     #     print(db_table + " finish!")
+    if type == "i":
+        # ds8.coalesce(5).write.mode("append").jdbc(url=url, table="data_import")  # 在bigdata8运行出错代码
+        ds8.coalesce(15).write.jdbc(mode="append", url=url,table="data_import_" + year, properties={"driver": 'com.mysql.jdbc.Driver'})
+        print(db_table + " finish!")
 
 
 
