@@ -14,6 +14,8 @@ def jaccard_similarity(target, source):
     actual_jaccard = round(len(s1.intersection(s2)) / len(s1.union(s2)), 2)
     return actual_jaccard
 
-print(str(jaccard_similarity('北京大学法学院', '北京大学法律学系')))
+print(str(jaccard_similarity('北京大学法学院', '北京大学法律学系'))) # 0.62
 
-print(str(jaccard_similarity('北京大学法律学系', '北京大学法律学系')))
+print(str(jaccard_similarity('北京大学法律学系', '北京大学法律学系'))) # 1
+
+print(str(jaccard_similarity('北京大学法律学系北京大学法律学系', '北京大学法律学系'))) # 1

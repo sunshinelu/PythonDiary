@@ -1,0 +1,6 @@
+mysql-connector
+scikit-learn
+pyramid
+numpy
+falcon
+pyramid-arima

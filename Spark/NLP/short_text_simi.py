@@ -84,7 +84,7 @@ mhSimiDF = docsimi_mh.select("datasetA.text", "datasetB.text", "distCol").toDF(*
 w = Window.partitionBy("address").orderBy(col("distCol").asc())
 ds_simi = mhSimiDF.withColumn("rn", row_number().over(w)).where(col("rn") <= 1).drop("rn")
 
-ds_simi.show(20, truncate = False)
+# ds_simi.show(20, truncate = False)
 
 # Saving data to a JDBC source
 ds_simi.write \

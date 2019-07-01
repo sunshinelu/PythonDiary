@@ -4,6 +4,7 @@
 """
 
 在192.168.37.28 bigdata8上执行
+将数据按照年合并
 报错：
 py4j.protocol.Py4JJavaError: An error occurred while calling o361.jdbc. : scala.MatchError: null
 

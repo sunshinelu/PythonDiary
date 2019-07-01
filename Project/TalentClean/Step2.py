@@ -43,7 +43,7 @@ ds = ds.withColumn("identification_id",check_idcard_udf(func.col("identification
 ds.select("identification_id").drop_duplicates().show(200,truncate=False)
 
 
-
+ds.select("sex").dropDuplicates().show(truncate=False)
 
 
 
