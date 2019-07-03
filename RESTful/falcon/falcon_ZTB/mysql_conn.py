@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-@Author:     lufeng
-@Contact:    lufeng0614@163.com
+@Author:     weihua gao
+@Contact:    synes9@163.com
 @Time:       2019/5/6  11:49
 @note：      connection mysql | shengtong sql | ......
 """

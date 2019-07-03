@@ -1,5 +1,3 @@
-# things.py
-
 import json
 import requests
 import mimetypes
@@ -89,10 +87,10 @@ class PreProcess(object):
 
                 rtn['Code'], rtn['Mesg'] = data_preprocess(input_sql_type,
                                                            output_sql_type,
-                                                           doc['temp_table'],
-                                                           doc['new_table'],
-                                                           doc['process'],
-                                                           doc['time']
+                                                           doc['temp_table'],  #读取table
+                                                           doc['new_table'],   #输出table
+                                                           doc['process'],     #功能
+                                                           doc['time']         #时间段
                                                            )
 
         except Exception as e:

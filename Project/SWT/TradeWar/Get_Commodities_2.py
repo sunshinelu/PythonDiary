@@ -20,4 +20,4 @@ ds_hs_code = spark.read.jdbc(url=url,table="ut_hs_code").select("CODE","NAME").w
 
 ds1 = ds.join(ds_hs_code, "CODE","inner")
 # ds1.show(truncate=False)
-ds1.write.jdbc(mode="overwrite",url=url,table="COMMODITIES_TYPE")
+ds1.write.jdbc(mode="overwrite",url=url,table="COMMODITIES_TYPE",properties={"driver": 'com.mysql.jdbc.Driver'})

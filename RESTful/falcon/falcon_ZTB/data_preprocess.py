@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-@Author:     lufeng
-@Contact:    lufeng0614@163.com
+@Author:     weihua gao
+@Contact:    synes9@163.com
 @Time:       2019/5/5  9:41
 @note：      EvayAI Data Mining for data process
 """
@@ -67,7 +67,6 @@ def date_process(df, time):
 
 
 def type_area(df): #1
-    #全部数据已跑，存入test_01
     ts = pd.Series(df['type'].values.reshape(-1)) #change type
     ts = ts.str.replace(' ', '') #delete space
     df['type'] = ts.to_frame()
@@ -79,7 +78,7 @@ def type_area(df): #1
     df['analyzer'] = 'WEIHUA GAO'
     df['delete_flag'] = None
     df['delete_time'] = None
-    df = df.drop(df[(df['provinces']=='')].index.tolist())
+    df = df.drop(df[(df['provinces'] == '')].index.tolist())
     #return df.loc[:, ['id','provinces', 'type', 'quantity', 'analyze_time', 'analyzer', 'delete_flag', 'delete_time']]
     return 'All data is None' if df.empty else df.loc[:, ['id', 'provinces', 'type', 'quantity', 'analyze_time',
                                                           'analyzer', 'delete_flag', 'delete_time']]
@@ -103,15 +102,13 @@ def type_person(df): #2
 
     df = df.append(ag, ignore_index=True)
 
-    df = df.drop(df[(df['institutional_name'] == '')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '//')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == 'novalue')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '****')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '..')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '0432-63041628')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '13838636032')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '18137993160 0379-65522116')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '2019—4—26')].index.tolist())
+    reg = ".*[\u4E00-\u9FA5]+.*"
+    for index in range(0, df.shape[0]):
+        text = df.ix[index, 'institutional_name']
+        match_obj = re.match(reg, str(text))  # check institutional_name
+        if match_obj is None:
+            df.drop([index], inplace=True)
+    df.reset_index(drop=True, inplace=True)
 
     for index in range(0, df.shape[0]):
         df.ix[index, 'id'] = str(uuid.uuid4())  #add new id
@@ -127,50 +124,67 @@ def type_person(df): #2
 
 
 def title_person(df): #3
-    df = df.drop(df[(df['purchaser'] == '')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '//')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == 'novalue')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '****')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '..')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '0432-63041628')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '13838636032')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '18137993160 0379-65522116')].index.tolist())
-    df = df.drop(df[(df['purchaser'] == '2019—4—26')].index.tolist())
-    ag = df.groupby(by='purchaser', as_index=False).count()  #不同的purchaser的名字
-    df = df.set_index('purchaser') #原数据
+    #过滤数据
+    reg = ".*[\u4E00-\u9FA5]+.*"
+    for index in range(0, df.shape[0]):
+        text_1 = df.ix[index, 'purchaser']
+        text_2 = df.ix[index, 'agency']
+        match_obj1 = re.match(reg, str(text_1))  #check institutional_name
+        match_obj2 = re.match(reg, str(text_2))  #check relevant_name
+        if match_obj1 is None or match_obj2 is None:
+            df.drop([index], inplace=True)
+    df.reset_index(drop=True, inplace=True) #恢复index
+
+    ag = df.groupby(by='purchaser', as_index=False).count()  #按照purchaser进行分组
+    df = df.set_index('purchaser') #设为index
     final_1 = pd.DataFrame(columns=['word', 'count', 'institutional_name'])
     for index in range(0, ag.shape[0]):
-        words = jieba.cut(str(df.loc[ag.ix[index, 'purchaser'], 'title']), cut_all=True)#若为1,返回str，否则series
+        text = ''
+        if isinstance(df.loc[ag.ix[index, 'purchaser'], 'title'], pd.Series):
+            text_frame = df.loc[ag.ix[index, 'purchaser'], 'title'].to_frame()  # series转dataframe
+            text_frame.reset_index(drop=True, inplace=True)
+            for index1 in range(0, text_frame.shape[0]):
+                text += text_frame['title'][index1]
+        else:
+            text = df.loc[ag.ix[index, 'purchaser'], 'title']
+        words = jieba.cut(text, cut_all=True)
         segments = []
         for word in words:
-            segments.append({'word': word, 'count': 1})
+            if word != "":  # 去除空格
+                segments.append({'word': word, 'count': 1})
         qs = pd.DataFrame(segments)
-        qs.groupby(by='word', as_index=False).count()
-        qs = qs.drop(qs[(qs['word'] == '')].index.tolist())
+        qs = qs.groupby(by='word', as_index=False).count()   #统计总数量
         qs['institutional_name'] = ag.ix[index, 'purchaser'] #purchaser的名字
         final_1 = final_1.append(qs, ignore_index=True)
     final_1['institutional_type'] = 'purchaser'
 
-    df = df.drop(df[(df['agency'] == '')].index.tolist())
-
-    ag = df.groupby(by='agency', as_index=False).count()  # 不同的agency的名字,ag在之前存的是不同purchaser的名字
-    df.reset_index()
+    ag = df.groupby(by='agency', as_index=False).count()     #按照agency进行分组
+    df.reset_index(drop=True, inplace=True)
     df = df.set_index('agency')  # 原数据
+
     final_2 = pd.DataFrame(columns=['word', 'count', 'institutional_name'])
     for index in range(0, ag.shape[0]):
-        # print(df.loc[ag.ix[index, 'purchaser'], 'title'])
-        words = jieba.cut(str(df.loc[ag.ix[index, 'agency'], 'title']), cut_all=True)  # 若为1,返回str，否则series
+        text = ''
+        if isinstance(df.loc[ag.ix[index, 'agency'], 'title'], pd.Series):
+            text_frame = df.loc[ag.ix[index, 'agency'], 'title'].to_frame() #series转dataframe
+            text_frame.reset_index(drop=True, inplace=True)
+            for index1 in range(0, text_frame.shape[0]):
+                text += text_frame['title'][index1]
+        else:
+            text = df.loc[ag.ix[index, 'agency'], 'title']
+        words = jieba.cut(text, cut_all=True)
         segments = []
         for word in words:
-            segments.append({'word': word, 'count': 1})
+            if word != "":  #去除空格
+                segments.append({'word': word, 'count': 1})
         qs = pd.DataFrame(segments)
-        qs.groupby(by='word', as_index=False).count()
-        qs = qs.drop(qs[(qs['word'] == '')].index.tolist())
+        qs = qs.groupby(by='word', as_index=False).count()
         qs['institutional_name'] = ag.ix[index, 'agency']  # agency的名字
         final_2 = final_2.append(qs, ignore_index=True)
     final_2['institutional_type'] = 'agency'
 
-    final_1 = final_1.append(final_2, ignore_index=True)
+    final_1 = final_1.append(final_2, ignore_index=True)  #合并
+    final_1.reset_index(drop=True, inplace=True)  # 恢复index
     for index in range(0, final_1.shape[0]):
         final_1.ix[index, 'id'] = str(uuid.uuid4())  # add new id
     final_1['analyze_time'] = datetime.now()
@@ -185,35 +199,35 @@ def title_person(df): #3
                                                                     'delete_flag', 'delete_time']]
 
 def social_relationship(df): #4
-    ag = df.groupby(by=['purchaser', 'agency'], as_index=False).count()
+    #已经存入test_04
+    #正确性已经测试，drop已经测试正常
+    ag = df.groupby(by=['purchaser', 'agency'], as_index=False).count()  #统计数量
     ag.rename(columns={'id': 'weight'}, inplace=True)  # change name
     ag.rename(columns={'purchaser': 'institutional_name'}, inplace=True)
     ag.rename(columns={'agency': 'relevant_name'}, inplace=True)
     ag['institutional_type'] = 'purchaser'
     ag['relevant_type'] = 'agency'
 
-    df = df.groupby(by=['agency', 'purchaser'], as_index=False).count()
+    df = df.groupby(by=['agency', 'purchaser'], as_index=False).count()  #统计数量
     df.rename(columns={'id': 'weight'}, inplace=True)  # change name
     df.rename(columns={'agency': 'institutional_name'}, inplace=True)
     df.rename(columns={'purchaser': 'relevant_name'}, inplace=True)
     df['institutional_type'] = 'agency'
     df['relevant_type'] = 'purchaser'
+    df = df.append(ag, ignore_index=True)  #拼接表格
 
-    df = df.append(ag, ignore_index=True)
-    df = df.drop(df[(df['institutional_name'] == '')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '//')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == 'novalue')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '18055432550')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '***')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '----')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '......')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '///')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '////')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '/////')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == '//////')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == 'nocalue')].index.tolist())
-    df = df.drop(df[(df['institutional_name'] == 'XXXX')].index.tolist())
+    #过滤数据
+    reg = ".*[\u4E00-\u9FA5]+.*"
+    for index in range(0, df.shape[0]):
+        text_1 = df.ix[index, 'institutional_name']
+        text_2 = df.ix[index, 'relevant_name']
+        match_obj1 = re.match(reg, text_1)  #check institutional_name
+        match_obj2 = re.match(reg, text_2)  #check relevant_name
+        #print(match_obj)
+        if match_obj1 is None or match_obj2 is None:
+            df.drop([index], inplace=True)
 
+    df.reset_index(drop=True, inplace=True) #drop之后index会乱，所以要重新从0开始排列
     for index in range(0, df.shape[0]):
         df.ix[index, 'id'] = str(uuid.uuid4())
     df['relationship'] = '合作关系'
