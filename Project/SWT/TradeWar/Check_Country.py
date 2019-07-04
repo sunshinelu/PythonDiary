@@ -72,6 +72,12 @@ ds4 = ds3.groupBy("COUNTRY")\
 
 # ds4.printSchema()
 ds4.show()
+"""
+select * from(
+select year,COUNTRY,SUM(rmb) as rmb,SUM(usd) as usd from country_data_import GROUP BY year ,COUNTRY   order by year 
+) b
+where year=2015 ORDER BY rmb desc
+"""
 
 
 spark.stop()

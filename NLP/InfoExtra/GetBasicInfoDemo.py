@@ -39,7 +39,7 @@ df1 = df[columns]#.head(10)
 # print df1
 list1 = df1.values.tolist()
 # print list1
-print "-------"
+print("-------")
 
 list2 = []
 for k in df1.values:
@@ -89,7 +89,7 @@ for i in list2:
     GetName(str(i).encode('utf-8'))
 
 for i, j in property.iteritems():
-    print i
+    print(i)
 
 print(property)
 

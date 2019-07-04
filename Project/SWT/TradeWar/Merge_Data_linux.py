@@ -21,7 +21,7 @@ yarn application -list
 
 spark-submit --master yarn --deploy-mode client --num-executors 10 --executors-cores 2 mnistOnSpark.py
 
-nohup spark-submit --master yarn --deploy-mode client --num-executors 4 --executor-cores  2 --executor-memory 4g /root/lulu/Workspace/swt/Merge_Data_linux.py &
+nohup spark-submit --master yarn --deploy-mode client --num-executors 6 --executor-cores  2 --executor-memory 4g /root/lulu/Workspace/swt/Merge_Data_linux.py &
 
 
 """
