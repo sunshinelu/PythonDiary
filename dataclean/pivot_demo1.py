@@ -108,3 +108,23 @@ MONTH
 Name: 2015, dtype: object
 """
 
+table = "country_data_import"
+# sql语句
+sqlcmd = "select * from " + table
+
+# 利用pandas 模块导入mysql数据
+df = pd.read_sql(sqlcmd, dbconn)
+
+df["USD"] = pd.to_numeric(df["USD"])
+df["RMB"] = pd.to_numeric(df["RMB"])
+print(df.dtypes)
+
+df3 = pd.pivot_table(df, values=['USD', 'RMB'], index=['YEAR'],
+                     columns=['COUNTRY'], aggfunc=np.sum)
+print(df3)
+
+# 对透视表进行排序
+print(df3.sort_values(axis = 1, by='2015',ascending=False))
+
+# 获取排序后的透视表部分数据
+print(df3.sort_values(axis = 1, by='2019',ascending=False).iloc[4, 0:10])
