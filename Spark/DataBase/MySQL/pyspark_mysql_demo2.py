@@ -12,3 +12,4 @@ ds1 = spark.read.jdbc(url="jdbc:mysql://localhost:3306/data_mining_db?user=root&
                       properties={"driver": 'com.mysql.jdbc.Driver'})
 
 ds1.show(5)
+

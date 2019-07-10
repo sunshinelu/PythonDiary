@@ -32,7 +32,7 @@ col_5 = "text,label".split(",")
 
 ds2 = ds1.select(col_1)\
     .dropna().dropDuplicates()\
-    .withColumn("tag", lit("address")).toDF(* col_5)
+    .withColumn("tag", lit("address")).toDF(* col_2)
 
 ds2.printSchema()
 
