@@ -32,9 +32,9 @@ df = spark.read.jdbc(url="jdbc:mysql://localhost:3306/data_mining_db?user=root&p
 cols = ["var1","var2"]
 
 
-mode_dict = dict()
-for c in cols:
-    mode_dict[c] = df.stat.approxQuantile(c, [0.5], 0.001)[0]
-   print(df.stat.approxQuantile(c, [0.5], 0.001))
+# mode_dict = dict()
+# for c in cols:
+#     mode_dict[c] = df.stat.approxQuantile(c, [0.5], 0.001)[0]
+#    print(df.stat.approxQuantile(c, [0.5], 0.001))
 
 

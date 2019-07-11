@@ -50,7 +50,7 @@ def baike_extract(url,name):
         file_name.close()
 
         for i,j in property.iteritems():
-            print i.encode('utf-8'),j.encode('utf-8')
+            print(i.encode('utf-8'),j.encode('utf-8'))
 
     elif "http://www.baike.com/" in url:
         req = urllib2.Request(url)
