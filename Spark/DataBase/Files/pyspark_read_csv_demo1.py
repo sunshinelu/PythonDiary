@@ -21,11 +21,11 @@ print(ds1.select("HSCODE").dropDuplicates().count())
 
 
 # Saving data to a JDBC source
-# ds1.write \
-#     .format("jdbc") \
-#     .option("url", "jdbc:mysql://localhost:3306/gongdan?useUnicode=true&characterEncoding=UTF-8") \
-#     .option("dbtable", "Industry") \
-#     .option("user", "root") \
-#     .option("password", "root") \
-#     .mode("overwrite") \
-#     .save()
+ds1.write \
+    .format("jdbc") \
+    .option("url", "jdbc:mysql://localhost:3306/gongdan?useUnicode=true&characterEncoding=UTF-8") \
+    .option("dbtable", "Industry") \
+    .option("user", "root") \
+    .option("password", "root") \
+    .mode("overwrite") \
+    .save()
