@@ -24,7 +24,9 @@ spark = SparkSession\
 url = "jdbc:mysql://10.20.5.49:3306/rgznpt_sjy?useUnicode=true&characterEncoding=UTF-8&user=root&password=BigData@2018"
 
 table_name = "nlp_sogou_classification_mini"
-ds = spark.read.jdbc(url=url,table=table_name)
+ds = spark.read.jdbc(url=url,table=table_name).filter(F.length("txt") >= 10)
+
+ds.select("label").distinct().show()
 
 splits = ds.randomSplit([0.7,0.3], 24)
 
