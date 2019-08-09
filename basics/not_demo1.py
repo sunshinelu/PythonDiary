@@ -9,3 +9,8 @@ string = "s"
 
 if not string:
      print(string)
+
+print("===========")
+
+if string is None:
+     print(string)

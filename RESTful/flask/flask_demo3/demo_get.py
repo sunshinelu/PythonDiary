@@ -10,7 +10,7 @@ postman中，get方法输入以下链接：
 http://127.0.0.1:5000/
 """
 
-# -*- coding: utf-8 -*-
+
 
 from flask import Flask
 from flask_restful import Resource, Api

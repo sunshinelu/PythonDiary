@@ -90,5 +90,20 @@ model = pipeline.fit(train_tfidf)
 ds_pre = model.transform(test_tfidf)
 print("+++++++++++++")
 ds_pre.printSchema()
+"""
+root
+ |-- title: string (nullable = true)
+ |-- label: string (nullable = true)
+ |-- text: string (nullable = true)
+ |-- words: array (nullable = true)
+ |    |-- element: string (containsNull = true)
+ |-- rawFeatures: vector (nullable = true)
+ |-- features: vector (nullable = true)
+ |-- indexedLabel: double (nullable = false)
+ |-- rawPrediction: vector (nullable = true)
+ |-- probability: vector (nullable = true)
+ |-- prediction: double (nullable = false)
+ |-- predictedLabel: string (nullable = true)
+"""
 
 spark.stop()
