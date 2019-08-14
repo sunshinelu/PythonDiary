@@ -15,6 +15,10 @@
 pyinstaller --onefile --add-data 'templates:templates' single_flaskapp.py 
 打包
 
+打包完成后进入dist文件夹
+
+执行 ./single_flaskapp
+
 测试：
 curl http://127.0.0.1:5000/123
 
