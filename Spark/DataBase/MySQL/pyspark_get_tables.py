@@ -33,6 +33,7 @@ ds = spark.read.format('jdbc'). \
 
 ds1 = ds.select("TABLE_NAME").filter(col("TABLE_NAME").startswith("b_data_"))
 ds1.show()
+# ds1.printSchema
 
 ds.dropna()
 
