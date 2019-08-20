@@ -17,13 +17,16 @@ https://blog.icocoro.me/2018/03/07/1803-pyspark-elasticsearch/
 https://www.cnblogs.com/FG123/p/9748836.html
 
 https://github.com/a342058040/Spark-for-Python
+https://github.com/a342058040/Spark-for-Python/blob/master/spark_sql/spark_weather.py
+
+将elasticsearch-spark-20_2.11-6.2.3.jar 放在$SPARK_HOME/jars目录下。
 """
 
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 
 import os
-os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
+# os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
 
 
 spark = SparkSession\
@@ -36,7 +39,8 @@ schema = StructType([
     StructField("email", StringType(), True)
 ])
 
-data = [('1', 'ss'), ('2', 'dd'), ('3', 'ff_update'), ('4', '嘻嘻嘻')]
+data = [('1', 'ss'), ('2', 'dd'), ('3', 'ff_update'), ('4', '哈哈哈')]
+# data = [('10', 'ss'), ('20', 'dd'), ('30', 'ff_update'), ('40', '哈哈哈')]
 
 save_df = spark.createDataFrame(data, ['id', 'uname'])
 save_df.show(truncate=False)
@@ -57,3 +61,5 @@ df = spark.read \
     .load()
 
 df.show(truncate=False)
+
+spark.stop()
