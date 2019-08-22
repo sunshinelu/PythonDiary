@@ -10,6 +10,7 @@ spark = SparkSession\
         .builder\
         .appName("read csv")\
         .getOrCreate()
+print(str(spark.version))
 
 path_import = "/Users/sunlu/Documents/创新研究院/产品/Evay人工智能平台/产品-Evay人工智能平台v1.0/最佳实践/商务厅/贸易战影响分析/贸易摩擦清单+行业详细hscode.csv"
 ds1 = spark.read.csv(path_import,header=True,encoding="UTF-8").select("HS_CODE","TYPE").toDF("HSCODE","Industry")

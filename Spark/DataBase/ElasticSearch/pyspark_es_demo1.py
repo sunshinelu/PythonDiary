@@ -24,6 +24,7 @@ https://github.com/a342058040/Spark-for-Python/blob/master/spark_sql/spark_weath
 
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+from pyspark.sql import *
 
 import os
 # os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6" #在Mac中使用
