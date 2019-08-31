@@ -49,7 +49,7 @@ save_df.show(truncate=False)
 save_df.write \
     .format("org.elasticsearch.spark.sql") \
     .option("es.nodes", "127.0.0.1") \
-    .option("es.resource", "pyspark_es/data") \
+    .option("es.resource", "pyspark_es/data2") \
     .option("es.mapping.id", "id") \
     .mode('append') \
     .save()
@@ -58,7 +58,7 @@ save_df.write \
 df = spark.read \
     .format("org.elasticsearch.spark.sql") \
     .option("es.nodes", "127.0.0.1") \
-    .option("es.resource", "pyspark_es/data") \
+    .option("es.resource", "pyspark_es/data2") \
     .load()
 
 df.show(truncate=False)
