@@ -199,9 +199,9 @@ res = r'<div class="para" label-module="para">(.*?)</div>'
 mm = re.findall(res, content, re.S|re.M)
 # print mm
 for value in mm:
-    print value
+    print(value)
 
 print("==================")
 
 soup = BeautifulSoup(content, "html.parser")
-print soup
+print(soup)
