@@ -47,12 +47,12 @@ def cos_sim(a,b):
 
 # apply the UDF to the column
 df = df.withColumn("coSim", udf(cos_sim, FloatType())(col("myCol"), array([lit(v) for v in static_vector])))
-print "9999999999999",df.show()
+print("9999999999999"),df.show()
 res = df.limit(10).toPandas()
-print res
+print(res)
 
 print("====================")
 print(array([lit(v) for v in static_vector]))
 
 for v in static_vector:
-    print v
+    print(v)
