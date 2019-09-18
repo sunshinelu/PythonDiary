@@ -6,7 +6,7 @@
  @File    : read_sql_demo1.py
  @Note    : 
 
- 使用sql
+ 使用sql读取工程院士数据，并将结果保存在mysql中
  """
 
 

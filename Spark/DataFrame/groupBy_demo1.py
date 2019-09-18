@@ -24,7 +24,7 @@ from pyspark.sql.window import Window
 from pyspark.sql.functions import asc
 
 # os.environ["PYSPARK_PYTHON"]="/usr/bin/python3"
-os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6"
+# os.environ["PYSPARK_PYTHON"]="/Users/sunlu/anaconda2/envs/python36/bin/python3.6"
 
 spark = SparkSession\
         .builder\
