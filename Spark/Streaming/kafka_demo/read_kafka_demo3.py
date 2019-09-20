@@ -5,7 +5,7 @@
  @Date    : 19/9/18 上午11:29 
  @File    : read_kafka_demo3.py
  @Note    : 
- 
+ 对数据进行处理后，将结果保存成json然后以key的形式发出，传输给Kafka。
  """
 
 
