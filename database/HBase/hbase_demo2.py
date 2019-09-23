@@ -4,29 +4,37 @@
  @Author  : sunlu 
  @Date    : 19/9/23 下午6:22 
  @File    : hbase_demo2.py
- @Note    : 
+ @Note    : 运行失败！！！
+报错：
+thrift.transport.TTransport.TTransportException: TSocket read 0 bytes
+
+https://www.cnblogs.com/junle/p/7611540.html
 
  https://blog.csdn.net/luanpeng825485697/article/details/81048468
 
  http://www.manongjc.com/article/44908.html
  https://github.com/626626cdllp/infrastructure/tree/master/hbase
+
+ https://www.cnblogs.com/cyue/p/10754938.html
  """
 
 from thrift.transport import TSocket,TTransport
-from thrift.protocol import TBinaryProtocol
 from hbase import Hbase
+from thrift.protocol import TBinaryProtocol,TCompactProtocol
 
 # thrift默认端口是9090
-socket = TSocket.TSocket("192.168.37.21",9090)
+socket = TSocket.TSocket('192.168.37.22',port=9090)
 socket.setTimeout(500000)
 
-transport = TTransport.TBufferedTransport(socket)
-protocol = TBinaryProtocol.TBinaryProtocol(transport)
-
+transport = TTransport.TFramedTransport(socket)
+# transport = TTransport.TBufferedTransport(socket)
+# protocol = TBinaryProtocol.TBinaryProtocol(transport) # 不使用这个协议
+protocol = TCompactProtocol.TCompactProtocol(transport)
 client = Hbase.Client(protocol)
-socket.open()
 
-print(client.getTableNames())
+socket.open()
+table = client.getTableNames()
+print(table)
 # print(client.get('t_student_sunlu','row1','info:name'))
 
 """

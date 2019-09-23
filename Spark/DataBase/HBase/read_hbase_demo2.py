@@ -6,6 +6,7 @@
  @File    : read_hbase_demo2.py
  @Note    : 
  https://mvnrepository.com/artifact/org.apache.spark/spark-examples_2.11/1.6.0-typesafe-001
+ https://blog.csdn.net/qiang0066/article/details/79669947
  """
 
 
@@ -50,7 +51,10 @@ for (k, v) in output:
 
 #spark连接hbase，读取RDD数据
 
-spark = SparkSession.builder.master("local[*]").appName("hbase_test").getOrCreate()
+spark = SparkSession.builder\
+    .master("local[*]")\
+    .appName("hbase_test")\
+    .getOrCreate()
 
 host = "192.168.37.21,192.168.37.22,192.168.37.23"
 table = 't_student_sunlu'

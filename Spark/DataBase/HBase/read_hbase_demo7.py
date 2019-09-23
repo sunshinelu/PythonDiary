@@ -7,6 +7,7 @@
  @Note    : 
  
  """
+"""
 import java.lang
 from org.apache.hadoop.hbase import HBaseConfiguration, HTableDescriptor, HColumnDescriptor, TableName
 from org.apache.hadoop.hbase.client import Admin, Connection, ConnectionFactory, Get, Put, Result, Table
@@ -47,3 +48,5 @@ result = table.get(get)
 data = java.lang.String(result.getValue("content", "qual"), "UTF8")
 
 print "The fetched row contains the value '%s'" % data
+
+"""
