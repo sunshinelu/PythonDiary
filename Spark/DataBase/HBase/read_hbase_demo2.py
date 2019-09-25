@@ -56,7 +56,8 @@ spark = SparkSession.builder\
     .appName("hbase_test")\
     .getOrCreate()
 
-host = "192.168.37.21,192.168.37.22,192.168.37.23"
+# host = "192.168.37.21,192.168.37.22,192.168.37.23"
+host = "192.168.37.22"
 table = 't_student_sunlu'
 clientPort = "2181"
 

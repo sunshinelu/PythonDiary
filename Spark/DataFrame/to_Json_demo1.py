@@ -61,6 +61,8 @@ sdf.withColumn("JSON", to_json(struct(
 
 from pyspark.sql.functions import coalesce
 
+
+# 缺失值用为空字符串
 sdf.withColumn("JSON", to_json(struct(
        [coalesce(col(x), lit("")).alias(x) for x in sdf.columns]
     )
@@ -78,7 +80,7 @@ sdf.withColumn("JSON", to_json(struct(
 
 """
 
-
+# 缺失值用为None
 sdf.withColumn("JSON", to_json(struct(
        [coalesce(col(x), lit(None)).alias(x) for x in sdf.columns]
     )

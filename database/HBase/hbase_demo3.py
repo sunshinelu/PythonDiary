@@ -3,7 +3,7 @@
 """
  @Author  : sunlu 
  @Date    : 19/9/23 下午8:50 
- @File    : read_hbase_demo3.py
+ @File    : hbase_demo3.py
  @Note    : 运行成功
  参考链接：
  thriftpy2.transport.TTransportException: TTransportException("Could not connect to(9090)问题解决

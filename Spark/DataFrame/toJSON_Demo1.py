@@ -67,8 +67,8 @@ for i in na_col:
 
 ds2.show(truncate=False)
 
-# file_path = "/Users/sunlu/Workspaces/PyCharm/PythonDiary/results/json_file"
-# ds1.toJSON().saveAsTextFile(file_path)
+file_path = "/Users/sunlu/Workspaces/PyCharm/PythonDiary/results/json_file"
+ds1.toJSON().saveAsTextFile(file_path)
 
 """
 brokers = "127.0.0.1:9092"

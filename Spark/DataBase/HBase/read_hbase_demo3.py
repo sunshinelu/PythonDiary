@@ -3,14 +3,15 @@
 """
  @Author  : sunlu 
  @Date    : 19/9/23 下午3:45 
- @File    : read_hbase_demo3.py
+ @File    : hbase_demo3.py
  @Note    : 
  
  """
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.appName("test hbase").getOrCreate()
-host = "192.168.37.21,192.168.37.22,192.168.37.23"
+# host = "192.168.37.21,192.168.37.22,192.168.37.23"
+host = "192.168.37.22"
 table = 't_student_sunlu'
 
 conf = {"hbase.zookeeper.quorum": host, "hbase.mapreduce.inputtable": table}
