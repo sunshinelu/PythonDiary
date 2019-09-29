@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+
+"""
+ @Author  : sunlu 
+ @Date    : 19/9/25 下午2:51 
+ @File    : setup.py
+ @Note    : 
+
+进入当前目录
+ 输入命令：
+python setup.py build
+
+可生成build文件在，在build文件的lib 文件夹可看到so文件。
+ """
+import Cython.Build
+import distutils.core
+data_preprocess = Cython.Build.cythonize("/Users/sunlu/Downloads/pyd_test/data_preprocess.py")[0] #提取Extension对象
+mysql_conn = Cython.Build.cythonize("/Users/sunlu/Downloads/pyd_test/mysql_conn.py")[0]
+distutils.core.setup(
+name = 'pyd的编译测试', #包名称
+version = "1.0", #包版本号
+ext_modules= [data_preprocess,mysql_conn], #被扩展的模块
+author = "孙露", #作者
+author_email='sunlu@sdas.org' #作者邮箱
+)
