@@ -31,6 +31,8 @@ cd /Users/sunlu/Software/kafka_2.11-0.10.2.0/bin
  参考链接：
 kafka+spark streaming代码实例(pyspark+python)
  https://blog.csdn.net/chenyulancn/article/details/79420522
+平台搭建---spark生态版本问题
+ https://blog.csdn.net/qingqing7/article/details/79213110
  """
 
 from kafka import KafkaProducer
@@ -45,7 +47,7 @@ def main():
     with open("/Users/sunlu/Workspaces/PyCharm/PythonDiary/results/json.txt/part-00000-cebef46f-507a-49b9-9782-298f65654e12-c000.txt", 'r') as f:
         for line in f.readlines():
             time.sleep(1)
-            producer.send("test", line)
+            producer.send("test", bytes(line, 'utf-8'))
             print
             line
             # producer.flush()
